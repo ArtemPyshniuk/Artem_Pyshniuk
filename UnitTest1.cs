@@ -1,9 +1,9 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 
-namespace proj
+namespace SeleniumHomework
 {
     [TestFixture()]
     public class Test
@@ -16,30 +16,65 @@ namespace proj
         [Test()]
         public void TestCase1AddUser()
         {
-            
-            pageNavigate.OpenSite();
-            pageNavigate.Login();
+
+            if (pageNavigate.IsOpenSite())
+            {
+                pageNavigate.driver.FindElement(By.Id("menu_admin_viewAdminModule")).Click();
+            }
+
+            else
+            {
+                pageNavigate.OpenSite();
+                pageNavigate.Login();
+            }
+
             pageNavigate.AddUser("ESS", "Harry Kane", username, "ArtemPyshniuk_25");
+            
             Assert.IsTrue(pageNavigate.CheckUser(username));
+
         }
         [Test()]
         public void TestCase2FindUser()
         {
+
+            if (pageNavigate.IsOpenSite())
+            {
+                pageNavigate.driver.FindElement(By.Id("menu_admin_viewAdminModule")).Click();
+            }
+
+            else
+            {
+                pageNavigate.OpenSite();
+                pageNavigate.Login();
+            }
+
             pageNavigate.FindUser(username);
             Assert.IsTrue(pageNavigate.CheckUser(username));
             Assert.IsTrue(pageNavigate.CheckUser("ESS"));
             Assert.IsTrue(pageNavigate.CheckUser("Harry Kane"));
             Assert.IsTrue(pageNavigate.CheckUser("Enabled"));
             pageNavigate.ResetAfterFind();
-           
-
             Assert.IsTrue(pageNavigate.CheckUser(username));
+
+           
         }
         [Test()]
         public void TestCase3DeleteUser()
         {
+            if (pageNavigate.IsOpenSite())
+            {
+                pageNavigate.driver.FindElement(By.Id("menu_admin_viewAdminModule")).Click();
+            }
+
+            else
+            {
+                pageNavigate.OpenSite();
+                pageNavigate.Login();
+            }
+
             pageNavigate.DeleteUser(username);
             Assert.IsFalse(pageNavigate.CheckUser(username));
+
         }
     }
 }

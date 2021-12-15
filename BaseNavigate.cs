@@ -2,11 +2,11 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 
-namespace proj
+namespace SeleniumHomework
 {
     public class BaseNavigate
     {
- 
+
         public IWebDriver driver;
         public string siteUrl;
 
@@ -14,14 +14,6 @@ namespace proj
         {
             driver = new ChromeDriver();
             this.siteUrl = siteUrl;
-            //siteUrl = "https://www.automatetheplanet.com/test-automation-reporting-allure/";
-
-            //ChromeOptions options = new ChromeOptions();
-
-            //options.AddArgument("no-sandbox");
-
-            //driver  = new ChromeDriver(options);
-            //drv.Manage().Timeouts().PageLoad.Add(System.TimeSpan.FromSeconds(30));
         }
 
         public void OpenSite()
@@ -29,9 +21,19 @@ namespace proj
             driver.Navigate().GoToUrl(this.siteUrl);
         }
 
+        public void CloseSite()
+        {
+            driver.Quit();
+        }
+
+        public bool IsOpenSite()
+        {
+            if (driver.Url.Contains("index.php"))
+                return true;
+            return false;
+        }
 
     }
 
 
 }
-

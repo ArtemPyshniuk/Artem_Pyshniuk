@@ -3,7 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace proj
+namespace SeleniumHomework
 {
     public class PageNavigate : BaseNavigate
     {
@@ -53,8 +53,11 @@ namespace proj
             this.driver.FindElement(By.Id("systemUser_password")).SendKeys(password);
             this.driver.FindElement(By.Id("systemUser_confirmPassword")).SendKeys(password);
 
-            this.driver.FindElement(By.Id("btnSave")).Click();
-            System.Threading.Thread.Sleep(30000);
+            while (this.driver.Url != "https://opensource-demo.orangehrmlive.com/index.php/admin/viewSystemUsers")
+            {
+                this.driver.FindElement(By.Id("btnSave")).Click();
+                System.Threading.Thread.Sleep(3000);
+            }
 
         }
 
